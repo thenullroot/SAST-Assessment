@@ -48,24 +48,30 @@ The goal is to identify vulnerabilities, map them to **OWASP Top 10 categories**
 ## 🚀 How to Reproduce
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/SAST-Assessment.git
+   git clone https://github.com/thenullroot/SAST-Assessment.git
    cd SAST-Assessment/Vulnerable-Flask-App
 
 2. Set up a Python virtual environment and install dependencies:
 
+```bash
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+```
 
 3. Run the vulnerable Flask app:
 
+```bash
 python vulnerable-flask-app-linux.py
+```
 
 4. Execute Semgrep scans:
 
+```bash
 semgrep --config=auto vulnerable-flask-app-linux.py
 semgrep --config=owasp-top-ten vulnerable-flask-app-linux.py
 semgrep --config=p/python vulnerable-flask-app-linux.py
+```
 
 👨‍💻 Author
 Aniket Nayak – Aspiring Penetration Tester

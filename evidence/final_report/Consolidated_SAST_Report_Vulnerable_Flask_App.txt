@@ -1,0 +1,427 @@
+===========================================================
+Consolidated SAST Findings Report – Vulnerable Flask App
+===========================================================
+
+Tool Used: Semgrep (Baseline, OWASP Top 10, Python rulesets)
+
+-----------------------------------------------------------
+Executive Overview
+-----------------------------------------------------------
+
+This report consolidates the results of three independent 
+static application security testing (SAST) scans performed 
+on the deliberately insecure "Vulnerable Flask App":
+
+1. Baseline Scan (general security ruleset)
+2. OWASP Top 10 Scan (rules mapped to OWASP Top 10 2025)
+3. Python Ruleset Scan (language-specific rules)
+
+Purpose:
+- Identify vulnerabilities across multiple perspectives.
+- Map findings to OWASP Top 10 (2025) categories.
+- Provide remediation guidance for each vulnerability type.
+- Deliver a consolidated comparison showing overlaps and 
+  unique findings.
+- Present a risk trend analysis and executive summary 
+  suitable for professional reporting.
+
+Key Highlights:
+- Injection flaws dominate across all scans (SQL Injection, 
+  XSS, Command Injection).
+- Path Traversal and Request Data Write issues highlight 
+  unsafe file handling.
+- Security Misconfiguration (Flask app bound to 0.0.0.0) 
+  exposes the app publicly.
+- Findings confirm the app’s design as a penetration 
+  testing lab environment.
+
+-----------------------------------------------------------
+Baseline Scan Findings
+-----------------------------------------------------------
+
+The baseline Semgrep scan identified multiple vulnerabilities 
+in the "vulnerable-flask-app-linux.py" file. These findings 
+are mapped to OWASP Top 10 (2025) categories and include 
+remediation guidance.
+
+-----------------------------------------------------------
+Table: Baseline Scan Vulnerabilities
+-----------------------------------------------------------
+
+Vulnerability: SQL Injection
+OWASP Category: Injection
+Severity: Blocking
+Description: User input directly used in SQL string.
+Remediation: Use parameterized queries or ORM (e.g., SQLAlchemy).
+
+-----------------------------------------------------------
+
+Vulnerability: Cross-Site Scripting (XSS)
+OWASP Category: Cross-Site Scripting
+Severity: Blocking
+Description: Flask route returns formatted string or raw HTML 
+concatenation with user input.
+Remediation: Use render_template() and escape user input.
+
+-----------------------------------------------------------
+
+Vulnerability: Command Injection
+OWASP Category: Injection
+Severity: Blocking
+Description: User input passed to subprocess with shell=True.
+Remediation: Avoid shell=True, use safe APIs, allowlist commands.
+
+-----------------------------------------------------------
+
+Vulnerability: Path Traversal
+OWASP Category: Broken Access Control / Injection
+Severity: Blocking
+Description: User input used in open() calls.
+Remediation: Validate filenames, use os.path.abspath() or pathlib.
+
+-----------------------------------------------------------
+
+Vulnerability: Insecure Deserialization
+OWASP Category: Software and Data Integrity Failures
+Severity: Blocking
+Description: Unsafe use of pickle.loads() with user input.
+Remediation: Avoid pickle for untrusted data, use safe serializers.
+
+-----------------------------------------------------------
+
+Summary:
+The baseline scan confirms multiple high-risk vulnerabilities 
+aligned with OWASP Top 10 categories. Injection flaws dominate, 
+with unsafe file handling and insecure deserialization also 
+present.
+
+-----------------------------------------------------------
+OWASP Top 10 Scan Findings
+-----------------------------------------------------------
+
+The OWASP Top 10 ruleset scan identified 17 findings in the 
+"vulnerable-flask-app-linux.py" file. These findings are mapped 
+to OWASP Top 10 (2025) categories and include remediation guidance.
+
+-----------------------------------------------------------
+Table: OWASP Top 10 Scan Vulnerabilities
+-----------------------------------------------------------
+
+Vulnerability: SQL Injection
+OWASP Category: Injection
+Severity: Blocking
+Description: User input directly used in SQL string.
+Remediation: Use parameterized queries or ORM (e.g., SQLAlchemy).
+
+-----------------------------------------------------------
+
+Vulnerability: Cross-Site Scripting (XSS)
+OWASP Category: Cross-Site Scripting
+Severity: Blocking
+Description: Flask route returns formatted string or raw HTML 
+concatenation with user input.
+Remediation: Use render_template() and escape user input.
+
+-----------------------------------------------------------
+
+Vulnerability: Command Injection
+OWASP Category: Injection
+Severity: Blocking
+Description: User input passed to subprocess with shell=True.
+Remediation: Avoid shell=True, use safe APIs, allowlist commands.
+
+-----------------------------------------------------------
+
+Vulnerability: Path Traversal
+OWASP Category: Broken Access Control / Injection
+Severity: Blocking
+Description: User input used in open() calls.
+Remediation: Validate filenames, use os.path.abspath() or pathlib.
+
+-----------------------------------------------------------
+
+Vulnerability: Request Data Write
+OWASP Category: Broken Access Control
+Severity: Blocking
+Description: User input written directly to file.
+Remediation: Sanitize input, restrict file paths, escape data.
+
+-----------------------------------------------------------
+
+Vulnerability: Security Misconfiguration
+OWASP Category: Security Misconfiguration
+Severity: Blocking
+Description: Flask app exposed on 0.0.0.0.
+Remediation: Bind to 127.0.0.1 in dev, use proper deployment configs.
+
+-----------------------------------------------------------
+
+Summary:
+The OWASP Top 10 scan confirms multiple high-risk vulnerabilities 
+aligned with OWASP categories. Injection flaws dominate, with unsafe 
+file handling and misconfiguration issues also present. The findings 
+validate the app’s design as a penetration testing lab environment.
+
+-----------------------------------------------------------
+Python Ruleset Scan Findings
+-----------------------------------------------------------
+
+The Python-specific Semgrep ruleset scan identified 17 findings 
+in the "vulnerable-flask-app-linux.py" file. These findings are 
+mapped to OWASP Top 10 (2025) categories and include remediation 
+guidance.
+
+-----------------------------------------------------------
+Table: Python Ruleset Vulnerabilities
+-----------------------------------------------------------
+
+Vulnerability: SQL Injection
+OWASP Category: Injection
+Severity: Blocking
+Description: User input directly used in SQL string.
+Remediation: Use parameterized queries or ORM (e.g., SQLAlchemy).
+
+-----------------------------------------------------------
+
+Vulnerability: Cross-Site Scripting (XSS)
+OWASP Category: Cross-Site Scripting
+Severity: Blocking
+Description: Flask route returns formatted string or raw HTML 
+concatenation with user input.
+Remediation: Use render_template() and escape user input.
+
+-----------------------------------------------------------
+
+Vulnerability: Command Injection
+OWASP Category: Injection
+Severity: Blocking
+Description: User input passed to subprocess with shell=True.
+Remediation: Avoid shell=True, use safe APIs, allowlist commands.
+
+-----------------------------------------------------------
+
+Vulnerability: Path Traversal
+OWASP Category: Broken Access Control / Injection
+Severity: Blocking
+Description: User input used in open() calls.
+Remediation: Validate filenames, use os.path.abspath() or pathlib.
+
+-----------------------------------------------------------
+
+Vulnerability: Request Data Write
+OWASP Category: Broken Access Control
+Severity: Blocking
+Description: User input written directly to file.
+Remediation: Sanitize input, restrict file paths, escape data.
+
+-----------------------------------------------------------
+
+Vulnerability: Security Misconfiguration
+OWASP Category: Security Misconfiguration
+Severity: Blocking
+Description: Flask app exposed on 0.0.0.0.
+Remediation: Bind to 127.0.0.1 in dev, use proper deployment configs.
+
+-----------------------------------------------------------
+
+Summary:
+The Python ruleset scan confirms multiple high-risk vulnerabilities 
+aligned with OWASP categories. Injection flaws dominate, with unsafe 
+file handling and misconfiguration issues also present. The findings 
+validate the app’s design as a penetration testing lab environment.
+
+-----------------------------------------------------------
+Consolidated Comparison Table
+-----------------------------------------------------------
+
+This section compares findings across all three scans 
+(Baseline, OWASP Top 10, Python ruleset). It highlights 
+overlaps and unique vulnerabilities, mapped to OWASP Top 10 
+(2025) categories.
+
+-----------------------------------------------------------
+Table: Consolidated Vulnerability Comparison
+-----------------------------------------------------------
+
+Vulnerability: SQL Injection
+- Baseline Scan: Detected
+- OWASP Top 10 Scan: Detected
+- Python Ruleset Scan: Detected
+OWASP Category: Injection
+Remediation: Use parameterized queries or ORM (e.g., SQLAlchemy).
+
+-----------------------------------------------------------
+
+Vulnerability: Cross-Site Scripting (XSS)
+- Baseline Scan: Detected
+- OWASP Top 10 Scan: Detected
+- Python Ruleset Scan: Detected
+OWASP Category: Cross-Site Scripting
+Remediation: Use render_template() and escape user input.
+
+-----------------------------------------------------------
+
+Vulnerability: Command Injection
+- Baseline Scan: Detected
+- OWASP Top 10 Scan: Detected
+- Python Ruleset Scan: Detected
+OWASP Category: Injection
+Remediation: Avoid shell=True, use safe APIs, allowlist commands.
+
+-----------------------------------------------------------
+
+Vulnerability: Path Traversal
+- Baseline Scan: Detected
+- OWASP Top 10 Scan: Detected
+- Python Ruleset Scan: Detected
+OWASP Category: Broken Access Control / Injection
+Remediation: Validate filenames, use os.path.abspath() or pathlib.
+
+-----------------------------------------------------------
+
+Vulnerability: Request Data Write
+- Baseline Scan: Not Detected
+- OWASP Top 10 Scan: Detected
+- Python Ruleset Scan: Detected
+OWASP Category: Broken Access Control
+Remediation: Sanitize input, restrict file paths, escape data.
+
+-----------------------------------------------------------
+
+Vulnerability: Insecure Deserialization
+- Baseline Scan: Detected
+- OWASP Top 10 Scan: Detected
+- Python Ruleset Scan: Not Detected
+OWASP Category: Software and Data Integrity Failures
+Remediation: Avoid pickle for untrusted data, use safe serializers.
+
+-----------------------------------------------------------
+
+Vulnerability: Security Misconfiguration
+- Baseline Scan: Not Detected
+- OWASP Top 10 Scan: Detected
+- Python Ruleset Scan: Detected
+OWASP Category: Security Misconfiguration
+Remediation: Bind to 127.0.0.1 in dev, use proper deployment configs.
+
+-----------------------------------------------------------
+
+Summary:
+The consolidated comparison shows strong overlap across all 
+three scans. Injection flaws (SQLi, XSS, Command Injection) 
+are consistently detected. Path Traversal is flagged in all 
+scans. Request Data Write and Security Misconfiguration are 
+unique to OWASP/Python scans. Insecure Deserialization is 
+unique to Baseline/OWASP scans.
+
+-----------------------------------------------------------
+Risk Trend Analysis & Recommendations
+-----------------------------------------------------------
+
+Risk Trend Analysis:
+--------------------
+Across all three scans (Baseline, OWASP Top 10, Python ruleset), 
+the following risk trends are observed:
+
+1. Injection Flaws Dominate:
+   - SQL Injection, Cross-Site Scripting (XSS), and Command Injection 
+     appear consistently across all scans.
+   - These vulnerabilities represent the most critical risks, as they 
+     directly compromise confidentiality, integrity, and availability.
+
+2. Path Traversal:
+   - Detected in all scans, highlighting unsafe file handling practices.
+   - This vulnerability overlaps categories (Injection vs Broken Access 
+     Control), showing systemic issues in input validation.
+
+3. Request Data Write:
+   - Unique to OWASP/Python scans, indicating unsafe handling of user 
+     input when writing to files.
+   - This creates risks of denial-of-service or unauthorized file 
+     manipulation.
+
+4. Insecure Deserialization:
+   - Found in Baseline and OWASP scans, but not flagged in Python ruleset.
+   - This vulnerability can lead to remote code execution if exploited.
+
+5. Security Misconfiguration:
+   - Detected in OWASP and Python scans (Flask app bound to 0.0.0.0).
+   - This exposes the application publicly, increasing attack surface.
+
+Recommendations:
+----------------
+1. SQL Injection:
+   - Use parameterized queries or ORM (e.g., SQLAlchemy).
+   - Avoid manual string concatenation in SQL statements.
+
+2. Cross-Site Scripting (XSS):
+   - Use Flask’s render_template() for safe HTML rendering.
+   - Escape and sanitize all user input before output.
+
+3. Command Injection:
+   - Avoid subprocess calls with shell=True.
+   - Use safe APIs or allowlist commands explicitly.
+
+4. Path Traversal:
+   - Validate and sanitize filenames.
+   - Use os.path.abspath(), os.path.realpath(), or pathlib to enforce 
+     safe paths.
+
+5. Request Data Write:
+   - Sanitize user input before writing to files.
+   - Restrict file paths to safe directories.
+
+6. Insecure Deserialization:
+   - Avoid using pickle.loads() with untrusted data.
+   - Use safe serialization formats (JSON, YAML with safe loaders).
+
+7. Security Misconfiguration:
+   - Bind Flask app to 127.0.0.1 in development.
+   - Use production-ready deployment (e.g., Gunicorn, uWSGI) with 
+     proper firewall rules.
+
+-----------------------------------------------------------
+Summary:
+-----------------------------------------------------------
+The Vulnerable Flask App demonstrates multiple high-risk 
+vulnerabilities across all scans. Injection flaws are the 
+dominant risk, with unsafe file handling and misconfiguration 
+issues also present. Remediation requires adopting secure 
+coding practices, safe frameworks, and proper deployment 
+configurations.
+
+-----------------------------------------------------------
+Executive Summary
+-----------------------------------------------------------
+
+The consolidated Semgrep assessment of the Vulnerable Flask App 
+(Baseline, OWASP Top 10, Python rulesets) confirms the presence 
+of multiple high-risk vulnerabilities deliberately embedded for 
+penetration testing practice.
+
+Key Findings:
+- Injection flaws (SQL Injection, XSS, Command Injection) dominate 
+  across all scans.
+- Path Traversal and Request Data Write highlight unsafe file 
+  handling practices.
+- Insecure Deserialization is detected in Baseline/OWASP scans.
+- Security Misconfiguration (Flask bound to 0.0.0.0) exposes the app 
+  publicly.
+
+Risk Impact:
+These vulnerabilities align strongly with OWASP Top 10 (2025) 
+categories, confirming the app’s suitability as a lab environment 
+for offensive security training. If deployed in production, they 
+would pose severe risks to confidentiality, integrity, and 
+availability.
+
+Recommendations:
+- Adopt secure coding practices (parameterized queries, escaping, 
+  safe APIs).
+- Enforce strict input validation and sanitization.
+- Use safe serialization formats and avoid insecure deserialization.
+- Configure Flask securely with proper deployment practices.
+
+-----------------------------------------------------------
+End of Report
+-----------------------------------------------------------

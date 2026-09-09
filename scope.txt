@@ -1,0 +1,3 @@
+SAST Scope:
+In scope: vulnerable-flask-app-linux.py, vulnerable-flask-app-windows.py
+Out of scope: requirements.txt, test.db, README.md, LICENSE

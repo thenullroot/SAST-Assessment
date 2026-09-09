@@ -1,0 +1,182 @@
+                    
+                    
+┌──────────────────┐
+│ 17 Code Findings │
+└──────────────────┘
+                                                
+  [36m[22m[24m  vulnerable-flask-app-linux.py[0m
+   ❯❯❱ python.flask.security.injection.tainted-sql-string.tainted-sql-string
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Detected user input used to manually construct a SQL string. This is usually bad practice because 
+          manual construction could accidentally result in a SQL injection. An attacker could use a SQL     
+          injection to steal or modify contents of the database. Instead, use a parameterized query which is
+          available by default in most database engines. Alternatively, consider using an object-relational 
+          mapper (ORM) such as SQLAlchemy which will protect your queries.                                  
+          Details: https://sg.run/JxZj                                                                      
+                                                                                                            
+           20┆ cur.execute("select * from test where username = '%s'" % name)
+   
+    ❯❱ python.flask.security.audit.directly-returned-format-string.directly-returned-format-string
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Detected Flask route directly returning a formatted string. This is subject to cross-site scripting
+          if user input can reach the string. Consider using the template engine instead and rendering pages 
+          with 'render_template()'.                                                                          
+          Details: https://sg.run/Zv6o                                                                       
+                                                                                                             
+           37┆ return data
+   
+    ❯❱ python.django.security.injection.raw-html-format.raw-html-format
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Detected user input flowing into a manually constructed HTML string. You may be accidentally       
+          bypassing secure methods of rendering HTML by manually constructing HTML and this could create a   
+          cross-site scripting vulnerability, which could let attackers steal sensitive user data. To be sure
+          this is safe, check that the HTML is rendered safely. Otherwise, use templates                     
+          (`django.shortcuts.render`) which will safely render HTML instead.                                 
+          Details: https://sg.run/oYj1                                                                       
+                                                                                                             
+           43┆         template = f'''<div>
+           44┆         <h1>Hello</h1>
+           45┆         {name}
+           46┆ </div>
+           47┆ '''
+   
+    ❯❱ python.flask.security.injection.raw-html-concat.raw-html-format
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Detected user input flowing into a manually constructed HTML string. You may be accidentally       
+          bypassing secure methods of rendering HTML by manually constructing HTML and this could create a   
+          cross-site scripting vulnerability, which could let attackers steal sensitive user data. To be sure
+          this is safe, check that the HTML is rendered safely. Otherwise, use templates                     
+          (`flask.render_template`) which will safely render HTML instead.                                   
+          Details: https://sg.run/Pb7e                                                                       
+                                                                                                             
+           43┆         template = f'''<div>
+           44┆         <h1>Hello</h1>
+           45┆         {name}
+           46┆ </div>
+           47┆ '''
+   
+   ❯❯❱ python.flask.security.injection.subprocess-injection.subprocess-injection
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Detected user input entering a `subprocess` call unsafely. This could result in a command injection 
+          vulnerability. An attacker could use this vulnerability to execute arbitrary commands on the host,  
+          which allows them to download malware, scan sensitive data, or run any command they wish on the     
+          server. Do not let users choose the command to run. In general, prefer to use Python API versions of
+          system commands. If you must use subprocess, use a dictionary to allowlist a set of commands.       
+          Details: https://sg.run/5gW3                                                                        
+                                                                                                              
+           58┆ data = subprocess.check_output(command, shell=True)
+   
+   ❯❯❱ python.lang.security.dangerous-subprocess-use.dangerous-subprocess-use
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Detected subprocess function 'check_output' with user controlled data. A malicious actor could
+          leverage this to perform command injection. You may consider using 'shlex.escape()'.          
+          Details: https://sg.run/NWxp                                                                  
+                                                                                                        
+           58┆ data = subprocess.check_output(command, shell=True)
+   
+   ❯❯❱ python.lang.security.audit.subprocess-shell-true.subprocess-shell-true
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Found 'subprocess' function 'check_output' with 'shell=True'. This is dangerous because this call 
+          will spawn the command using a shell process. Doing so propagates current shell settings and      
+          variables, which makes it much easier for a malicious actor to execute commands. Use 'shell=False'
+          instead.                                                                                          
+          Details: https://sg.run/J92w                                                                      
+                                                                                                            
+           ▶▶┆ Autofix ▶ False
+           58┆ data = subprocess.check_output(command, shell=True)
+   
+    ❯❱ python.flask.security.audit.directly-returned-format-string.directly-returned-format-string
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Detected Flask route directly returning a formatted string. This is subject to cross-site scripting
+          if user input can reach the string. Consider using the template engine instead and rendering pages 
+          with 'render_template()'.                                                                          
+          Details: https://sg.run/Zv6o                                                                       
+                                                                                                             
+           62┆ return data
+   
+    ❯❱ python.django.security.injection.path-traversal.path-traversal-open.path-traversal-open
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Found request data in a call to 'open'. Ensure the request data is validated or sanitized, otherwise
+          it could result in path traversal attacks and therefore sensitive data being leaked. To mitigate,   
+          consider using os.path.abspath or os.path.realpath or the pathlib library.                          
+          Details: https://sg.run/W8qg                                                                        
+                                                                                                              
+           76┆ filename = request.args.get('filename')
+           77┆ file = open(filename, "r")
+   
+   ❯❯❱ python.flask.security.injection.path-traversal-open.path-traversal-open
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Found request data in a call to 'open'. Ensure the request data is validated or sanitized, otherwise
+          it could result in path traversal attacks.                                                          
+          Details: https://sg.run/PJRW                                                                        
+                                                                                                              
+           77┆ file = open(filename, "r")
+   
+   ❯❯❱ python.flask.security.injection.subprocess-injection.subprocess-injection
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Detected user input entering a `subprocess` call unsafely. This could result in a command injection 
+          vulnerability. An attacker could use this vulnerability to execute arbitrary commands on the host,  
+          which allows them to download malware, scan sensitive data, or run any command they wish on the     
+          server. Do not let users choose the command to run. In general, prefer to use Python API versions of
+          system commands. If you must use subprocess, use a dictionary to allowlist a set of commands.       
+          Details: https://sg.run/5gW3                                                                        
+                                                                                                              
+          119┆ data=subprocess.check_output(command,shell=True)
+   
+   ❯❯❱ python.lang.security.dangerous-subprocess-use.dangerous-subprocess-use
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Detected subprocess function 'check_output' with user controlled data. A malicious actor could
+          leverage this to perform command injection. You may consider using 'shlex.escape()'.          
+          Details: https://sg.run/NWxp                                                                  
+                                                                                                        
+          119┆ data=subprocess.check_output(command,shell=True)
+   
+   ❯❯❱ python.lang.security.audit.subprocess-shell-true.subprocess-shell-true
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Found 'subprocess' function 'check_output' with 'shell=True'. This is dangerous because this call 
+          will spawn the command using a shell process. Doing so propagates current shell settings and      
+          variables, which makes it much easier for a malicious actor to execute commands. Use 'shell=False'
+          instead.                                                                                          
+          Details: https://sg.run/J92w                                                                      
+                                                                                                            
+           ▶▶┆ Autofix ▶ False
+          119┆ data=subprocess.check_output(command,shell=True)
+   
+    ❯❱ python.django.security.injection.path-traversal.path-traversal-open.path-traversal-open
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Found request data in a call to 'open'. Ensure the request data is validated or sanitized, otherwise
+          it could result in path traversal attacks and therefore sensitive data being leaked. To mitigate,   
+          consider using os.path.abspath or os.path.realpath or the pathlib library.                          
+          Details: https://sg.run/W8qg                                                                        
+                                                                                                              
+          127┆ filename=request.args.get("filename")
+          128┆ text=request.args.get("text")
+          129┆ file=open(filename,"w")
+   
+    ❯❱ python.django.security.injection.request-data-write.request-data-write
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Found user-controlled request data passed into '.write(...)'. This could be dangerous if a malicious
+          actor is able to control data into sensitive files. For example, a malicious actor could force      
+          rolling of critical log files, or cause a denial-of-service by using up available disk space.       
+          Instead, ensure that request data is properly escaped or sanitized.                                 
+          Details: https://sg.run/0Q6j                                                                        
+                                                                                                              
+          128┆ text=request.args.get("text")
+          129┆ file=open(filename,"w")
+          130┆ file.write(text)
+   
+   ❯❯❱ python.flask.security.injection.path-traversal-open.path-traversal-open
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Found request data in a call to 'open'. Ensure the request data is validated or sanitized, otherwise
+          it could result in path traversal attacks.                                                          
+          Details: https://sg.run/PJRW                                                                        
+                                                                                                              
+          129┆ file=open(filename,"w")
+   
+    ❯❱ python.flask.security.audit.app-run-param-config.avoid_app_run_with_bad_host
+          [31m[1m[24m❰❰ Blocking ❱❱[0m
+          Running flask app with host 0.0.0.0 could expose the server publicly.
+          Details: https://sg.run/eLby                                         
+                                                                               
+          228┆ app.run(host="0.0.0.0",port=8081)
+

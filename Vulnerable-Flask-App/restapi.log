@@ -1,0 +1,148 @@
+DEBUG:root:[('test', 'test'), ('test', '12345'), ('test', '$x&3de)GwWEIjyhpsA')]
+INFO:werkzeug:127.0.0.1 - - [06/Sep/2026 22:13:57] "GET /user/test HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Sep/2026 22:14:14] "GET /welcome/test HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Sep/2026 22:14:25] "GET /get_users HTTP/1.1" 200 -
+DEBUG:root:[('test', 'test'), ('test', '12345'), ('test', '$x&3de)GwWEIjyhpsA')]
+INFO:werkzeug:127.0.0.1 - - [06/Sep/2026 22:14:54] "GET /user/test HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Sep/2026 22:15:05] "GET /upload HTTP/1.1" 200 -
+ERROR:vulnerable-flask-app-linux:Exception on /user_pass_control [GET]
+Traceback (most recent call last):
+  File "/home/ani/SAST-Assessment/Vulnerable-Flask-App/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ani/SAST-Assessment/Vulnerable-Flask-App/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ani/SAST-Assessment/Vulnerable-Flask-App/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ani/SAST-Assessment/Vulnerable-Flask-App/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/ani/SAST-Assessment/Vulnerable-Flask-App/vulnerable-flask-app-linux.py", line 195, in user_pass_control
+    if re.search(username,password):
+       ~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/re/__init__.py", line 177, in search
+    return _compile(pattern, flags).search(string)
+           ~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/re/__init__.py", line 349, in _compile
+    raise TypeError("first argument must be string or compiled pattern")
+TypeError: first argument must be string or compiled pattern
+INFO:werkzeug:127.0.0.1 - - [06/Sep/2026 22:15:25] "[35m[1mGET /user_pass_control HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [06/Sep/2026 22:19:44] "GET / HTTP/1.1" 200 -
+DEBUG:root:[('test', 'test'), ('test', '12345'), ('test', '$x&3de)GwWEIjyhpsA')]
+INFO:werkzeug:127.0.0.1 - - [06/Sep/2026 22:19:54] "GET /user/test HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Sep/2026 22:20:08] "GET /welcome/test HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Sep/2026 22:20:17] "GET /welcome2/test HTTP/1.1" 200 -
+ERROR:vulnerable-flask-app-linux:Exception on /hello [GET]
+Traceback (most recent call last):
+  File "/home/ani/SAST-Assessment/Vulnerable-Flask-App/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ani/SAST-Assessment/Vulnerable-Flask-App/venv/lib/python3.13/site-packages/flask/app.py", line 920, in full_dispatch_request
+    return self.finalize_request(rv)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^
+  File "/home/ani/SAST-Assessment/Vulnerable-Flask-App/venv/lib/python3.13/site-packages/flask/app.py", line 939, in finalize_request
+    response = self.make_response(rv)
+  File "/home/ani/SAST-Assessment/Vulnerable-Flask-App/venv/lib/python3.13/site-packages/flask/app.py", line 1212, in make_response
+    raise TypeError(
+    ...<3 lines>...
+    )
+TypeError: The view function for 'hello_ssti' did not return a valid response. The function either returned None or ended without a return statement.
+INFO:werkzeug:127.0.0.1 - - [06/Sep/2026 22:20:28] "[35m[1mGET /hello HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [06/Sep/2026 22:20:52] "GET /get_users HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Sep/2026 22:22:55] "GET / HTTP/1.1" 200 -
+DEBUG:root:[('test', 'test'), ('test', '12345'), ('test', '$x&3de)GwWEIjyhpsA')]
+INFO:werkzeug:127.0.0.1 - - [06/Sep/2026 22:22:55] "GET /user/test HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Sep/2026 22:22:55] "GET /welcome/test HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Sep/2026 22:22:55] "GET /welcome2/test HTTP/1.1" 200 -
+ERROR:vulnerable-flask-app-linux:Exception on /hello [GET]
+Traceback (most recent call last):
+  File "/home/ani/SAST-Assessment/Vulnerable-Flask-App/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ani/SAST-Assessment/Vulnerable-Flask-App/venv/lib/python3.13/site-packages/flask/app.py", line 920, in full_dispatch_request
+    return self.finalize_request(rv)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^
+  File "/home/ani/SAST-Assessment/Vulnerable-Flask-App/venv/lib/python3.13/site-packages/flask/app.py", line 939, in finalize_request
+    response = self.make_response(rv)
+  File "/home/ani/SAST-Assessment/Vulnerable-Flask-App/venv/lib/python3.13/site-packages/flask/app.py", line 1212, in make_response
+    raise TypeError(
+    ...<3 lines>...
+    )
+TypeError: The view function for 'hello_ssti' did not return a valid response. The function either returned None or ended without a return statement.
+INFO:werkzeug:127.0.0.1 - - [06/Sep/2026 22:22:55] "[35m[1mGET /hello HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [06/Sep/2026 22:22:55] "GET /get_users HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Sep/2026 22:22:55] "GET /get_log/ HTTP/1.1" 200 -
+ERROR:vulnerable-flask-app-linux:Exception on /read_file [GET]
+Traceback (most recent call last):
+  File "/home/ani/SAST-Assessment/Vulnerable-Flask-App/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ani/SAST-Assessment/Vulnerable-Flask-App/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ani/SAST-Assessment/Vulnerable-Flask-App/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ani/SAST-Assessment/Vulnerable-Flask-App/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/ani/SAST-Assessment/Vulnerable-Flask-App/vulnerable-flask-app-linux.py", line 77, in read_file
+    file = open(filename, "r")
+TypeError: expected str, bytes or os.PathLike object, not NoneType
+INFO:werkzeug:127.0.0.1 - - [06/Sep/2026 22:22:55] "[35m[1mGET /read_file HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [06/Sep/2026 22:22:55] "GET /deserialization/ HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Sep/2026 22:22:55] "GET /get_admin_mail/test HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Sep/2026 22:22:55] "GET /run_file HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Sep/2026 22:22:55] "GET /create_file HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [06/Sep/2026 22:22:55] "GET /factorial/5 HTTP/1.1" 200 -
+ERROR:vulnerable-flask-app-linux:Exception on /login [GET]
+Traceback (most recent call last):
+  File "/home/ani/SAST-Assessment/Vulnerable-Flask-App/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ani/SAST-Assessment/Vulnerable-Flask-App/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ani/SAST-Assessment/Vulnerable-Flask-App/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ani/SAST-Assessment/Vulnerable-Flask-App/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/ani/SAST-Assessment/Vulnerable-Flask-App/vulnerable-flask-app-linux.py", line 167, in login
+    if "test" in username and "test" in passwd:
+       ^^^^^^^^^^^^^^^^^^
+TypeError: argument of type 'NoneType' is not iterable
+INFO:werkzeug:127.0.0.1 - - [06/Sep/2026 22:22:55] "[35m[1mGET /login HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [06/Sep/2026 22:22:55] "GET /route HTTP/1.1" 200 -
+DEBUG:root:None
+INFO:werkzeug:127.0.0.1 - - [06/Sep/2026 22:22:55] "GET /logs HTTP/1.1" 200 -
+ERROR:vulnerable-flask-app-linux:Exception on /user_pass_control [GET]
+Traceback (most recent call last):
+  File "/home/ani/SAST-Assessment/Vulnerable-Flask-App/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ani/SAST-Assessment/Vulnerable-Flask-App/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ani/SAST-Assessment/Vulnerable-Flask-App/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ani/SAST-Assessment/Vulnerable-Flask-App/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/ani/SAST-Assessment/Vulnerable-Flask-App/vulnerable-flask-app-linux.py", line 195, in user_pass_control
+    if re.search(username,password):
+       ~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/re/__init__.py", line 177, in search
+    return _compile(pattern, flags).search(string)
+           ~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/re/__init__.py", line 349, in _compile
+    raise TypeError("first argument must be string or compiled pattern")
+TypeError: first argument must be string or compiled pattern
+INFO:werkzeug:127.0.0.1 - - [06/Sep/2026 22:22:55] "[35m[1mGET /user_pass_control HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [06/Sep/2026 22:22:55] "GET /upload HTTP/1.1" 200 -
+ERROR:vulnerable-flask-app-linux:Exception on /login [GET]
+Traceback (most recent call last):
+  File "/home/ani/SAST-Assessment/Vulnerable-Flask-App/venv/lib/python3.13/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ani/SAST-Assessment/Vulnerable-Flask-App/venv/lib/python3.13/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ani/SAST-Assessment/Vulnerable-Flask-App/venv/lib/python3.13/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ani/SAST-Assessment/Vulnerable-Flask-App/venv/lib/python3.13/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/ani/SAST-Assessment/Vulnerable-Flask-App/vulnerable-flask-app-linux.py", line 167, in login
+    if "test" in username and "test" in passwd:
+       ^^^^^^^^^^^^^^^^^^
+TypeError: argument of type 'NoneType' is not iterable
+INFO:werkzeug:127.0.0.1 - - [06/Sep/2026 22:32:27] "[35m[1mGET /login HTTP/1.1[0m" 500 -

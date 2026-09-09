@@ -62,7 +62,7 @@ pip install -r requirements.txt
 3. Run the vulnerable Flask app:
 
 ```bash
-python vulnerable-flask-app-linux.py
+python3 vulnerable-flask-app-linux.py
 ```
 
 4. Execute Semgrep scans:

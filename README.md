@@ -1,5 +1,13 @@
 # Vulnerable Flask App – SAST Assessment
 
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)
+![Flask](https://img.shields.io/badge/flask-vulnerable-red.svg)
+![Semgrep](https://img.shields.io/badge/SAST-Semgrep-orange.svg)
+![Stars](https://img.shields.io/github/stars/thenullroot/SAST-Assessment?style=social)
+![Forks](https://img.shields.io/github/forks/thenullroot/SAST-Assessment?style=social)
+[![LinkedIn](https://img.shields.io/badge/Author-Aniket%20Nayak-blue)](https://www.linkedin.com/in/aniket-nayak-634495317/)
+
 ## 📌 Project Overview
 This repository contains a deliberately insecure Flask application designed for penetration testing practice.  
 The project demonstrates how to perform **Static Application Security Testing (SAST)** using **Semgrep** with multiple rulesets:
